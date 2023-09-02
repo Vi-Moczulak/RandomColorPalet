@@ -1,0 +1,21 @@
+<div class="topBar">
+    <button (click)="shuffleColors(tiles)"> Shuffle All Colors</button>
+    <button [cdkCopyToClipboard]="copyToClipboard()">Copy palet</button>
+    <button (click)="addColor()"><mat-icon>add_circle_outline</mat-icon></button>
+</div>
+
+<mat-grid-list [cols]="numberOfColors" rowHeight="95vh" (keyup.Space)="shuffleColors(tiles); $event.preventDefault() ">
+    <mat-grid-tile *ngFor="let tile of tiles" [style.background]="tile.colorHex" class="colorTile" >
+        <button mat-icon-button [cdkCopyToClipboard]="tile.colorHex" class="textColor">
+            {{tile.colorHex}}
+            <mat-icon>content_copy</mat-icon>
+        </button>
+        <button mat-icon-button [cdkCopyToClipboard]="tile.colorHex" class="textColor white">
+            {{tile.colorHex}}
+            <mat-icon>content_copy</mat-icon>
+        </button>
+        <button mat-icon-button (click)="shuffleColor(tile)"><mat-icon>shuffle</mat-icon></button>
+        <button mat-icon-button (click)="changeBlocked(tile)"><mat-icon>{{tile.blockedIcon}}</mat-icon></button>
+        <button mat-icon-button (click)="removeTiles(tile)"><mat-icon>clear</mat-icon></button>      
+    </mat-grid-tile>
+</mat-grid-list>
